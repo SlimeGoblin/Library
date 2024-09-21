@@ -61,5 +61,9 @@
     padding: 30px;
 }
 
+.unwatched{
+    background-color: red;
+}
+
 
 
