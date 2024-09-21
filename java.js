@@ -15,8 +15,8 @@ Try and make a loop that constructs objects in addCard()
 
 const myLibrary =[];
 
-const movie1 = new Movie('Us', 'Horror', 'Jordan Pelee', '178')
-const movie2 = new Movie('Starwars: Phantom Menace', 'Adventure', 'George Lucas', '123');
+var movie1 = new Movie('Us', 'Horror', 'Jordan Pelee', '178')
+var movie2 = new Movie('Starwars: Phantom Menace', 'Adventure', 'George Lucas', '123');
 
 myLibrary.push(movie1, movie2)
 
@@ -24,146 +24,71 @@ const form = document.getElementById('submitBtn')
 
 const container = document.getElementById("movieContainer");
 
+//get values
+var title = document.getElementById("title").value;
+var genre = document.getElementById("genre").value;
+var director= document.getElementById("director").value;
+var runTime = document.getElementById("runTime").value;
+var watched = true;
 
+//constructor
 
-
-
-
-function Movie(title, genre, director, runtime, watched) {
+function Movie(title, genre, director, runtime, watched, displayed) {
     this.title = title;
     this.genre = genre;
     this.director = director;
     this.runTime= runtime;
    this.watched = true;
-    this.toggleWatched = function(){
-        console.log(watched)
-        if(this.watched = true){
-            this.watched= false
-        }
-        else{
-            this.watched = true
-        }
-}
+   this.displayed = displayed;
+
 }
 
+function addMovieToLibrary(){
+    newMovie = new Movie (title, genre, director, runTime, watched, "undisplayed")
+    myLibrary.push(newMovie)
+
+    clearInputs();
+
+}
 
 form.addEventListener('click', function(e){
     e.preventDefault();
-    var movie = new Movie (
-        title = document.getElementById("title").value,
-        genre = document.getElementById("genre").value,
-        director= document.getElementById("director").value,
-        runTime = document.getElementById("runTime").value,
-        watched = true,
-    )
-
-        myLibrary.push(movie);
-        console.log(myLibrary);
-
+    addMovieToLibrary();
+    displayMovies();
+    
+});
         
 
-        const content = document.createElement("div");
-        content.classList.add("card");
 
-        const cardLabelTitle = document.createElement("div");
-        cardLabelTitle.classList.add("cardLabel");
-        cardLabelTitle.textContent = `Movie: ${title}`
-
-        const cardLabelGenre= document.createElement("div");
-        cardLabelGenre.classList.add("cardLabel");
-        cardLabelGenre.textContent = `Genre: ${genre}`
-
-        const cardLabelDirector= document.createElement("div");
-        cardLabelDirector.classList.add("cardLabel");
-        cardLabelDirector.textContent = `Director: ${director}`
-
-        const cardLabelRunTime= document.createElement("div");
-        cardLabelRunTime.classList.add("cardLabel");
-        cardLabelRunTime.textContent = `Run Time: ${runTime}`
-
-
-        const cardLabelWatched = document.createElement("button")
-        cardLabelWatched.classList.add("cardLabel");
-        cardLabelWatched.setAttribute("id", "watchedButton")
-        cardLabelWatched.textContent="Watched"
-
-        cardLabelWatched.addEventListener('click', function(){
-            console.log('hi')
-            console.log(watched)
-            if(watched == true){
-                watched = false
-                cardLabelWatched.textContent = "Unwatched"
-                content.classList.add("unwatched")
-            }
-            else if(watched ==false){
-                watched = true
-                console.log('bye')
-                cardLabelWatched.textContent="Watched"
-                content.classList.remove("unwatched")
-
-            }
-        })
-
-        const cardLabelRemove = document.createElement("button")
-        cardLabelRemove.classList.add("cardLabel");
-        cardLabelRemove.setAttribute("id", "removeButton")
-        cardLabelRemove.textContent="Remove"
-
-        
-        cardLabelRemove.addEventListener('click', function(){
-            content.remove();
-            myLibrary.splice([i], 1)
-           console.log(myLibrary);
-        })
-
-
-
-        content.appendChild(cardLabelTitle)
-        content.appendChild(cardLabelGenre)
-        content.appendChild(cardLabelDirector)
-        content.appendChild(cardLabelRunTime)
-        content.appendChild(cardLabelWatched)
-        content.appendChild(cardLabelRemove)
-
-        container.appendChild(content);
-
-
-clearInputs();
-
-})
-
-function addCard(){
-
+function displayMovies(){
     for (let i=0; i< myLibrary.length; i++){
 
-        console.log(myLibrary[i])
+        if (myLibrary[i].displayed == "displayed"){
+            continue;
+        }
+
+        console.log(myLibrary)
+
         const content = document.createElement("div");
         content.classList.add("card");
-
-        const movie = new Movie(
-
-        title = myLibrary[i].title,
-        genre = myLibrary[i].genre,
-        director = myLibrary[i].director,
-        runTime = myLibrary[i].runTime,
-        watched = myLibrary[i].watched,
-        )
+        myLibrary[i].displayed = "displayed"
+        console.log(myLibrary[i].displayed)
 
         const cardLabelTitle = document.createElement("div");
         cardLabelTitle.classList.add("cardLabel");
-        cardLabelTitle.textContent = `Movie: ${title}`
+        cardLabelTitle.textContent = `Movie: ${myLibrary[i].title}`
 
         const cardLabelGenre= document.createElement("div");
         cardLabelGenre.classList.add("cardLabel");
-        cardLabelGenre.textContent = `Genre: ${genre}`
+        cardLabelGenre.textContent = `Genre: ${myLibrary[i].genre}`
 
         const cardLabelDirector= document.createElement("div");
         cardLabelDirector.classList.add("cardLabel");
-        cardLabelDirector.textContent = `Director: ${director}`
+        cardLabelDirector.textContent = `Director: ${myLibrary[i].director}`
 
         const cardLabelRunTime= document.createElement("div");
         cardLabelRunTime.classList.add("cardLabel");
-        cardLabelRunTime.textContent = `Run Time: ${runTime}`
+        cardLabelRunTime.textContent = `Run Time: ${myLibrary[i].runTime}`
 
         const cardLabelWatched = document.createElement("button")
         cardLabelWatched.classList.add("cardLabel");
@@ -215,12 +140,17 @@ function addCard(){
     }
 }
 
-addCard();
 
 
 function clearInputs(){
-
         var inputs= document.querySelectorAll('input');
         inputs.forEach(x => x.value=``);
-
 }
+
+function removeSplice(){
+    for (let i = 0; i < myLibrary.length;  i++){
+        myLibrary.splice([i], 1)
+    }
+}
+
+displayMovies();
