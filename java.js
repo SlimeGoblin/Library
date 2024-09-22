@@ -1,5 +1,4 @@
 /* To Do List:
--Don't allow submit when empty inputs
 -Make new Book button that opens our form
 
 -Style CSS Better(FontFamily, Card Container Grid, Title, Form, Color Scheme))
@@ -15,7 +14,7 @@ var movie2 = new Movie('Starwars: Phantom Menace', 'Adventure', 'George Lucas', 
 myLibrary.push(movie1, movie2)
 
 //get values from form
-const form = document.getElementById('submitBtn')
+const form = document.getElementById('form')
 const container = document.getElementById("movieContainer");
 
 var title = document.getElementById("title").value;
@@ -56,7 +55,7 @@ function addMovieToLibrary(){
 
 //Add New Movie: Take form input into constructor, add to Library, Clear inputs
 
-form.addEventListener('click', function(e){
+form.addEventListener('submit', function(e){
     e.preventDefault();
     addMovieToLibrary();
     displayMovies();
