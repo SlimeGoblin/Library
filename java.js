@@ -1,18 +1,16 @@
 /* To Do List:
--Add Button to change display to read(try and build this into prototype)
 -Don't allow submit when empty inputs
 -Make new Book button that opens our form
 
 -Style CSS Better(FontFamily, Card Container Grid, Title, Form, Color Scheme))
-
 */
 
 //My LIbrary with Initial Values
 
 const myLibrary =[];
 
-var movie1 = new Movie('Us', 'Horror', 'Jordan Pelee', '178')
-var movie2 = new Movie('Starwars: Phantom Menace', 'Adventure', 'George Lucas', '123');
+var movie1 = new Movie('Us', 'Horror', 'Jordan Pelee', '178', 'true')
+var movie2 = new Movie('Starwars: Phantom Menace', 'Adventure', 'George Lucas', '123','true');
 
 myLibrary.push(movie1, movie2)
 
@@ -50,7 +48,7 @@ function addMovieToLibrary(){
     newMovie = new Movie (document.getElementById("title").value, document.getElementById("genre").value, document.getElementById(`director`).value, 
     document.getElementById(`runTime`).value, document.getElementById(`watched`).value, displayed)
     myLibrary.push(newMovie)
-    console.log(myLibrary)
+
 
     clearInputs();
 
@@ -73,6 +71,8 @@ function displayMovies(){
             continue;
         }
 
+
+        console.log(myLibrary[i].watched)
         console.log(myLibrary)
 
         const content = document.createElement("div");
@@ -101,22 +101,31 @@ function displayMovies(){
         cardLabelWatched.classList.add("cardLabel");
         cardLabelWatched.setAttribute("id", "watchedButton")
         cardLabelWatched.textContent="Watched"
+
+        function checkWatch(){
+            if(myLibrary[i].watched == 'false'){
+                cardLabelWatched.textContent = "Unwatched"
+                content.classList.add("unwatched")
+            }
+        }
+        checkWatch()
         
 
 
         cardLabelWatched.addEventListener('click', function(){
-            if(watched == true){
-                watched = false
+            if(watched == "true"){
+                watched = "false"
                 cardLabelWatched.textContent = "Unwatched"
                 content.classList.add("unwatched")
             }
-            else if(watched ==false){
-                watched = true
+            else {
+                watched = "true"
                 cardLabelWatched.textContent="Watched"
                 content.classList.remove("unwatched")
                 content.classList.add("watched")
             }
-        })
+        });
+        
 
         const cardLabelRemove = document.createElement("button")
         cardLabelRemove.classList.add("cardLabel");
