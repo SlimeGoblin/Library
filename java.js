@@ -1,7 +1,7 @@
 /* To Do List:
 -Make new Book button that opens our form
-
--Style CSS Better(FontFamily, Card Container Grid, Title, Form, Color Scheme))
+-Style CSS Better(FontFamily, Card Container Grid, Title, Form, Color Scheme)
+-Make look decent on Mobile?
 */
 
 //My LIbrary with Initial Values
@@ -15,6 +15,7 @@ myLibrary.push(movie1, movie2)
 
 //get values from form
 const form = document.getElementById('form')
+const newButton = document.getElementById("newButton");
 const container = document.getElementById("movieContainer");
 
 var title = document.getElementById("title").value;
@@ -23,6 +24,17 @@ var director= document.getElementById("director").value;
 var runTime = document.getElementById("runTime").value;
 var watched = document.getElementById("watched").value;
 var displayed = "undisplayed"
+
+//make form invisible
+
+form.style.visibility="hidden";
+
+//make form visible
+
+newButton.addEventListener('click', function(){
+    form.style.visibility="visible";
+    newButton.style.visibility="hidden";
+});
 
 
 
@@ -59,6 +71,8 @@ form.addEventListener('submit', function(e){
     e.preventDefault();
     addMovieToLibrary();
     displayMovies();
+    form.style.visibility="hidden";
+    newButton.style.visibility="visible";
 });
         
 //Loop through non-displayed movies in MyLibrary to create Cards
@@ -70,9 +84,12 @@ function displayMovies(){
             continue;
         }
 
+//tests
 
         console.log(myLibrary[i].watched)
         console.log(myLibrary)
+
+//create text in html, referencing myLibrary[i]
 
         const content = document.createElement("div");
         content.classList.add("card");
@@ -101,15 +118,20 @@ function displayMovies(){
         cardLabelWatched.setAttribute("id", "watchedButton")
         cardLabelWatched.textContent="Watched"
 
+//check if needs watched styling
+
         function checkWatch(){
             if(myLibrary[i].watched == 'false'){
                 cardLabelWatched.textContent = "Unwatched"
                 content.classList.add("unwatched")
             }
         }
-        checkWatch()
-        
 
+//check initial values
+
+        checkWatch()
+
+//check new values for watched
 
         cardLabelWatched.addEventListener('click', function(){
             if(watched == "true"){
@@ -125,6 +147,7 @@ function displayMovies(){
             }
         });
         
+        //remove function
 
         const cardLabelRemove = document.createElement("button")
         cardLabelRemove.classList.add("cardLabel");
