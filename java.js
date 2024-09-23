@@ -1,6 +1,4 @@
 /* To Do List:
--Make new Book button that opens our form
--Style CSS Better(FontFamily, Card Container Grid, Title, Form, Color Scheme)
 -Make look decent on Mobile?
 */
 
@@ -98,7 +96,7 @@ function displayMovies(){
 
         const cardLabelTitle = document.createElement("div");
         cardLabelTitle.classList.add("cardLabel");
-        cardLabelTitle.textContent = `Movie: ${myLibrary[i].title}`
+        cardLabelTitle.textContent = `Title: ${myLibrary[i].title}`
  
 
         const cardLabelGenre= document.createElement("div");
@@ -117,6 +115,7 @@ function displayMovies(){
         cardLabelWatched.classList.add("cardLabel");
         cardLabelWatched.setAttribute("id", "watchedButton")
         cardLabelWatched.textContent="Watched"
+        cardLabelWatched.style.backgroundColor='green'
 
 //check if needs watched styling
 
@@ -124,6 +123,7 @@ function displayMovies(){
             if(myLibrary[i].watched == 'false'){
                 cardLabelWatched.textContent = "Unwatched"
                 content.classList.add("unwatched")
+ 
             }
         }
 
@@ -138,12 +138,14 @@ function displayMovies(){
                 watched = "false"
                 cardLabelWatched.textContent = "Unwatched"
                 content.classList.add("unwatched")
+                cardLabelWatched.style.background='red'
             }
             else {
                 watched = "true"
                 cardLabelWatched.textContent="Watched"
                 content.classList.remove("unwatched")
                 content.classList.add("watched")
+                cardLabelWatched.style.background = 'green'
             }
         });
         
