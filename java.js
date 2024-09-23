@@ -1,8 +1,3 @@
-/* To Do List:
--fix rows so it looks better on shrink
--Make look decent on Mobile?
-*/
-
 //My LIbrary with Initial Values
 
 const myLibrary =[];
