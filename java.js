@@ -1,4 +1,5 @@
 /* To Do List:
+-fix rows so it looks better on shrink
 -Make look decent on Mobile?
 */
 
@@ -123,6 +124,7 @@ function displayMovies(){
             if(myLibrary[i].watched == 'false'){
                 cardLabelWatched.textContent = "Unwatched"
                 content.classList.add("unwatched")
+                cardLabelWatched.style.background='red'
  
             }
         }
